@@ -10,6 +10,8 @@ var apiRouter = require('./routes/api')
 
 var app = express();
 
+//这里是测试github的注释
+
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-Width, yourHeardFeild');
