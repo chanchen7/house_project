@@ -12,6 +12,7 @@ from mongo_tools import MongoDBProxy
 class HouseSpider(scrapy.Spider):
     name = "house"
     allowed_domains = ["com"]
+    
     start_urls = [
         "https://nj.lianjia.com/ershoufang/gulou/ep200/",
         "https://nj.lianjia.com/ershoufang/gulou/bp200ep300/",
