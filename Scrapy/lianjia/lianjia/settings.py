@@ -21,6 +21,9 @@ FEED_EXPORT_ENCODING = 'utf-8'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
+LOG_FILE = "mySpider.log"
+LOG_LEVEL = "INFO"
+
 
 #USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36'
 

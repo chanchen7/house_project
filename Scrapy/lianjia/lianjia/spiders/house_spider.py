@@ -1,9 +1,13 @@
+﻿#coding:utf-8
 import scrapy
 import time
+import sys
+#sys.path.append('/usr/local/lianjia/mongo')
+sys.path.append('K:\Backup\代码\GitRepository\house_project\Scrapy\lianjia\lianjia\mongo')
 from lianjia.items import HouseItem
 from lianjia.items import CommunityItem
 from lianjia.items import HousePriceItem
-from lianjia.mongo.mongo_tools import MongoDBProxy
+from mongo_tools import MongoDBProxy
 
 class HouseSpider(scrapy.Spider):
     name = "house"
@@ -39,19 +43,210 @@ class HouseSpider(scrapy.Spider):
         "https://nj.lianjia.com/ershoufang/qixia/bp300ep500/",
         "https://nj.lianjia.com/ershoufang/qixia/bp500ep100000/",
 
-        "https://nj.lianjia.com/ershoufang/jiangning/ep200/",
-        "https://nj.lianjia.com/ershoufang/jiangning/bp200ep300/",
-        "https://nj.lianjia.com/ershoufang/jiangning/bp300ep500/",
+        "https://nj.lianjia.com/ershoufang/jiangning/ep120/",
+        "https://nj.lianjia.com/ershoufang/jiangning/bp120ep170/",
+        "https://nj.lianjia.com/ershoufang/jiangning/bp170ep200/",
+        "https://nj.lianjia.com/ershoufang/jiangning/bp200ep230/",
+        "https://nj.lianjia.com/ershoufang/jiangning/bp230ep260/",
+        "https://nj.lianjia.com/ershoufang/jiangning/bp260ep300/",
+        "https://nj.lianjia.com/ershoufang/jiangning/bp300ep370/",
+        "https://nj.lianjia.com/ershoufang/jiangning/bp370ep500/",
         "https://nj.lianjia.com/ershoufang/jiangning/bp500ep100000/",
 
-        "https://nj.lianjia.com/ershoufang/pukou/ep200/",
-        "https://nj.lianjia.com/ershoufang/pukou/bp200ep300/",
-        "https://nj.lianjia.com/ershoufang/pukou/bp300ep500/",
+        "https://nj.lianjia.com/ershoufang/pukou/ep170/",
+        "https://nj.lianjia.com/ershoufang/pukou/bp170ep200/",
+        "https://nj.lianjia.com/ershoufang/pukou/bp200ep230/",
+        "https://nj.lianjia.com/ershoufang/pukou/bp230ep260/",
+        "https://nj.lianjia.com/ershoufang/pukou/bp260ep300/",
+        "https://nj.lianjia.com/ershoufang/pukou/bp300ep370/",
+        "https://nj.lianjia.com/ershoufang/pukou/bp370ep500/",
         "https://nj.lianjia.com/ershoufang/pukou/bp500ep100000/",
 
-        "https://nj.lianjia.com/ershoufang/liuhe/",
-        "https://nj.lianjia.com/ershoufang/lishui/",
-        "https://nj.lianjia.com/ershoufang/gaochun/"
+        "https://nj.lianjia.com/ershoufang/liuhe/ep200/",
+        "https://nj.lianjia.com/ershoufang/liuhe/bp200ep300/",
+        "https://nj.lianjia.com/ershoufang/liuhe/bp300ep500/",
+        "https://nj.lianjia.com/ershoufang/liuhe/bp500ep100000/",
+
+        "https://nj.lianjia.com/ershoufang/lishui/ep200/",
+        "https://nj.lianjia.com/ershoufang/lishui/bp200ep300/",
+        "https://nj.lianjia.com/ershoufang/lishui/bp300ep500/",
+        "https://nj.lianjia.com/ershoufang/lishui/bp500ep100000/",
+
+        "https://nj.lianjia.com/ershoufang/gaochun/",
+
+	    "https://sh.lianjia.com/ershoufang/pudong/ep200/",
+        "https://sh.lianjia.com/ershoufang/pudong/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/pudong/bp300ep400/",
+        "https://sh.lianjia.com/ershoufang/pudong/bp400ep500/",
+        "https://sh.lianjia.com/ershoufang/pudong/bp500ep800/",
+        "https://sh.lianjia.com/ershoufang/pudong/bp800ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/minhang/ep200/",
+        "https://sh.lianjia.com/ershoufang/minhang/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/minhang/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/minhang/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/baoshan/ep200/",
+        "https://sh.lianjia.com/ershoufang/baoshan/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/baoshan/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/baoshan/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/xuhui/ep200/",
+        "https://sh.lianjia.com/ershoufang/xuhui/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/xuhui/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/xuhui/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/putuo/ep200/",
+        "https://sh.lianjia.com/ershoufang/putuo/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/putuo/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/putuo/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/yangpu/ep200/",
+        "https://sh.lianjia.com/ershoufang/yangpu/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/yangpu/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/yangpu/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/changning/ep200/",
+        "https://sh.lianjia.com/ershoufang/changning/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/changning/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/changning/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/songjiang/ep200/",
+        "https://sh.lianjia.com/ershoufang/songjiang/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/songjiang/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/songjiang/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/jiading/ep200/",
+        "https://sh.lianjia.com/ershoufang/jiading/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/jiading/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/jiading/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/huangpu/ep200/",
+        "https://sh.lianjia.com/ershoufang/huangpu/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/huangpu/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/huangpu/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/jingan/ep200/",
+        "https://sh.lianjia.com/ershoufang/jingan/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/jingan/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/jingan/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/zhabei/ep200/",
+        "https://sh.lianjia.com/ershoufang/zhabei/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/zhabei/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/zhabei/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/hongkou/ep200/",
+        "https://sh.lianjia.com/ershoufang/hongkou/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/hongkou/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/hongkou/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/qingpu/ep200/",
+        "https://sh.lianjia.com/ershoufang/qingpu/bp200ep300/",
+        "https://sh.lianjia.com/ershoufang/qingpu/bp300ep500/",
+        "https://sh.lianjia.com/ershoufang/qingpu/bp500ep100000/",
+
+        "https://sh.lianjia.com/ershoufang/fengxian/",
+        "https://sh.lianjia.com/ershoufang/jinshan/",
+        "https://sh.lianjia.com/ershoufang/chongming/",
+        "https://sh.lianjia.com/ershoufang/shanghaizhoubian",
+
+        "https://hz.lianjia.com/ershoufang/xihu/ep200/",
+        "https://hz.lianjia.com/ershoufang/xihu/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/xihu/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/xihu/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/xiacheng/ep200/",
+        "https://hz.lianjia.com/ershoufang/xiacheng/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/xiacheng/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/xiacheng/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/jianggan/ep200/",
+        "https://hz.lianjia.com/ershoufang/jianggan/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/jianggan/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/jianggan/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/gongshu/ep200/",
+        "https://hz.lianjia.com/ershoufang/gongshu/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/gongshu/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/gongshu/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/shangcheng/ep200/",
+        "https://hz.lianjia.com/ershoufang/shangcheng/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/shangcheng/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/shangcheng/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/binjiang/ep200/",
+        "https://hz.lianjia.com/ershoufang/binjiang/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/binjiang/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/binjiang/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/yuhang/ep200/",
+        "https://hz.lianjia.com/ershoufang/yuhang/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/yuhang/bp300ep370/",
+        "https://hz.lianjia.com/ershoufang/yuhang/bp370ep500/",
+        "https://hz.lianjia.com/ershoufang/yuhang/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/xiaoshan/ep200/",
+        "https://hz.lianjia.com/ershoufang/xiaoshan/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/xiaoshan/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/xiaoshan/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/xiaoshan/ep200/",
+        "https://hz.lianjia.com/ershoufang/xiaoshan/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/xiaoshan/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/xiaoshan/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/fuyang/ep200/",
+        "https://hz.lianjia.com/ershoufang/fuyang/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/fuyang/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/fuyang/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/linan/ep200/",
+        "https://hz.lianjia.com/ershoufang/linan/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/linan/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/linan/bp500ep100000/",
+
+        "https://hz.lianjia.com/ershoufang/qiantangxinqu/ep200/",
+        "https://hz.lianjia.com/ershoufang/qiantangxinqu/bp200ep300/",
+        "https://hz.lianjia.com/ershoufang/qiantangxinqu/bp300ep500/",
+        "https://hz.lianjia.com/ershoufang/qiantangxinqu/bp500ep100000/",
+
+        "https://su.lianjia.com/ershoufang/gongyeyuan/ep200/",
+        "https://su.lianjia.com/ershoufang/gongyeyuan/bp200ep300/",
+        "https://su.lianjia.com/ershoufang/gongyeyuan/bp300ep500/",
+        "https://su.lianjia.com/ershoufang/gongyeyuan/bp500ep100000/",
+
+        "https://su.lianjia.com/ershoufang/wuzhong/ep200/",
+        "https://su.lianjia.com/ershoufang/wuzhong/bp200ep300/",
+        "https://su.lianjia.com/ershoufang/wuzhong/bp300ep500/",
+        "https://su.lianjia.com/ershoufang/wuzhong/bp500ep100000/",
+
+        "https://su.lianjia.com/ershoufang/gusu/ep200/",
+        "https://su.lianjia.com/ershoufang/gusu/bp200ep300/",
+        "https://su.lianjia.com/ershoufang/gusu/bp300ep500/",
+        "https://su.lianjia.com/ershoufang/gusu/bp500ep100000/",
+
+        "https://su.lianjia.com/ershoufang/gaoxin1/ep200/",
+        "https://su.lianjia.com/ershoufang/gaoxin1/bp200ep300/",
+        "https://su.lianjia.com/ershoufang/gaoxin1/bp300ep500/",
+        "https://su.lianjia.com/ershoufang/gaoxin1/bp500ep100000/",
+
+        "https://su.lianjia.com/ershoufang/wujiang/ep200/",
+        "https://su.lianjia.com/ershoufang/wujiang/bp200ep300/",
+        "https://su.lianjia.com/ershoufang/wujiang/bp300ep500/",
+        "https://su.lianjia.com/ershoufang/wujiang/bp500ep100000/",
+
+        "https://su.lianjia.com/ershoufang/xiangcheng/ep200/",
+        "https://su.lianjia.com/ershoufang/xiangcheng/bp200ep300/",
+        "https://su.lianjia.com/ershoufang/xiangcheng/bp300ep500/",
+        "https://su.lianjia.com/ershoufang/xiangcheng/bp500ep100000/",
+
+        "https://su.lianjia.com/ershoufang/kunshan/ep150/",
+        "https://su.lianjia.com/ershoufang/kunshan/bp150ep200/",
+        "https://su.lianjia.com/ershoufang/kunshan/bp200ep300/",
+        "https://su.lianjia.com/ershoufang/kunshan/bp300ep100000/"
+
     ]
 
     def parse(self, response):
@@ -60,18 +255,18 @@ class HouseSpider(scrapy.Spider):
         items = []
         for sel in homesearch.xpath('ul/li'):
             item = HousePriceItem()
-            lianjia_id = sel.xpath('a[@class="noresultRecommend img "]/@data-housecode').extract_first()
+            lianjia_id = sel.xpath('a[@class="noresultRecommend img LOGCLICKDATA"]/@data-housecode').extract_first()
             community_url = sel.xpath('div[@class="info clear"]/div[@class="address"]/div[@class="houseInfo"]/a/@href').extract_first()
             community_id = community_url.split('xiaoqu/')[1].split('/')[0]
             
-            item['house_id'] = lianjia_id       #链家编号
-            item['capture_time'] = time.strftime("%Y%m%d%H%M%S", time.localtime())   #截获时间
-            item['unit_price'] = sel.xpath('div[@class="info clear"]/div[@class="priceInfo"]/div[@class="unitPrice"]/@data-price').extract_first()     #每平米单价
-            item['total_price'] = sel.xpath('div[@class="info clear"]/div[@class="priceInfo"]/div[@class="totalPrice"]/span/text()').extract_first()    #总价
+            item['house_id'] = lianjia_id      
+            item['capture_time'] = time.strftime("%Y%m%d%H%M%S", time.localtime())  
+            item['unit_price'] = sel.xpath('div[@class="info clear"]/div[@class="priceInfo"]/div[@class="unitPrice"]/@data-price').extract_first()     
+            item['total_price'] = sel.xpath('div[@class="info clear"]/div[@class="priceInfo"]/div[@class="totalPrice"]/span/text()').extract_first()   
                 
             followInfo = sel.xpath('div[@class="info clear"]/div[@class="followInfo"]/text()').extract_first()
-            item['follow_total'] = followInfo.split('人关注')[0]   #总关注 
-            item['view_total'] = followInfo.split('/ 共')[1].split('次带看')[0]    #总带看
+            item['follow_total'] = followInfo.split('人关注')[0]   
+            item['view_total'] = '0' #暂时无法获取该数字   
             item['community'] = sel.xpath('div[@class="info clear"]/div[@class="address"]/div[@class="houseInfo"]/a/text()').extract_first().rstrip()
             item['community_id'] = community_id
             items.append(item)
@@ -94,7 +289,7 @@ class HouseSpider(scrapy.Spider):
             cur_page = int(splitStr[2].split('}')[0])
             if cur_page < total_page:
                 cur_page += 1
-                url = "https://nj.lianjia.com" + pageUrl.replace("{page}", str(cur_page))
+                url = response.url.split('/ershoufang/')[0] + pageUrl.replace("{page}", str(cur_page))
                 yield scrapy.Request(url, callback=self.parse)
 
     def parse_detail_community(self, response):

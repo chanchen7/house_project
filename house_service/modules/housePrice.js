@@ -23,6 +23,22 @@ function hasData(date){
     });
 }
 
+// 获取一段时间内的数据
+function getPeriodDateHouses(communityId, startdate, enddate) {
+    var startdatetime = startdate + "000000";
+    var enddatetime = enddate + "235959";
+    return new Promise(function(resolve, reject){
+        housePriceModel.find({community_id:communityId, capture_time:{$gt:startdatetime,$lt:enddatetime}}
+           , function(err, getPeriodHouses){
+            if (err) {
+                reject(err);
+            }
+
+            resolve(getPeriodHouses);
+        });
+    });
+}
+
 // 当日小区数据
 function getCurrentDateHouses(communityId, date) {
     return new Promise(function(resolve, reject){
@@ -71,6 +87,40 @@ function calcAvgPrice(houseInfos, communityId, date){
         date: date
     };
     return data;
+}
+
+// 查询小区一定范围日期的均价
+housePrice.statics.getPeriodAvgPriceByCommunityId = function(communityId, startdate, enddate){
+    return getPeriodDateHouses(communityId, startdate, enddate).then(function(getHouses){
+        if (getHouses.length > 0){
+            var dateMap = new Map();
+            var dateCountMap = new Map();
+            var ret = [];
+            for(let houseItem of getHouses){
+                var date = houseItem.capture_time.slice(0,8);
+                if (!dateMap.has(date)){
+                    dateMap.set(date, 0);
+                    dateCountMap.set(date, 0);
+                }
+                var sum = dateMap.get(date) + parseInt(houseItem.unit_price);
+                var count = dateCountMap.get(date) + 1;
+                dateMap.set(date, sum);
+                dateCountMap.set(date, count);
+            }
+
+            for (let key of dateMap.keys())
+            {
+                ret.push({
+                    date : key,
+                    avg_price : parseInt(dateMap.get(key) / dateCountMap.get(key))
+                }); 
+            }
+
+            return ret;
+        }
+    }).catch(function(err){
+        console.error(err);
+    });
 }
 
 // 查找小区指定日期报价

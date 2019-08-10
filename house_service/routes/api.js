@@ -4,7 +4,7 @@ var router = express.Router();
 var community = require('../modules/community')
 var housePrice = require('../modules/housePrice')
 
-router.post('/showCommunity', function (req, res, next){
+ router.post('/showCommunity', function (req, res, next){
     if (!req.body.community) {
       res.json({status:1, message:"检索条件为空!"})
     }
@@ -59,12 +59,41 @@ router.post('/showCommunity', function (req, res, next){
     else {
       var moment = require('moment')
       dates = [];
-      for(var i = 29; i >= 0; i--){
+      for(var i = req.body.days - 1; i >= 0; i--){
         dates.push(moment(req.body.date, 'YYYYMMDD').subtract(i, 'days').format('YYYYMMDD'));
       }
       return Promise.all(dates.map(function(date){
         return housePrice.getAvgPriceByCommunityId(req.body.communityId, date)
       })).then(function(datas){
+        datas.sort(function(x, y){
+          if (x.date < y.date) {
+            return -1;
+          } else if (x.date > y.date) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        res.json({status:0, message:"获取成功!", data: datas});
+      }).catch(function(err){
+          res.json({status:1, message:err});
+      });
+    }
+  });
+
+  router.post('/showPeriodAvgPriceStatByCommunity', function (req, res, next){
+    if (!req.body.communityId) {
+      res.json({status:1, message:"小区为空!"})
+    }
+    else if (!req.body.startdate || !req.body.enddate)
+    {
+      res.json({status:1, message:"检索时间为空!"}
+      )
+    }
+    else {
+      dates = [];
+      housePrice.getPeriodAvgPriceByCommunityId(req.body.communityId, req.body.startdate, req.body.endate)
+      .then(function(datas){
         datas.sort(function(x, y){
           if (x.date < y.date) {
             return -1;

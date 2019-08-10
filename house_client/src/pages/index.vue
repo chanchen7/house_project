@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div style="margin:5%">
+        <div style="margin:5%" id = "communtityList">
             <ul>
                 <Card v-for="(item,index) in communityList" :key="index">
                     <p slot="title">{{item.community}}</p>
@@ -37,7 +37,15 @@ export default {
         searchCommunity: function(event) {
             var moment = require('moment')
             var currentdate = moment().format('YYYYMMDD');
-            this.$http.post('http://139.199.223.208:80/apis/showAvgPriceByCommunity', { community: this.query, date: currentdate}).then((data) => {
+            const loading = this.$loading({
+              lock: true,
+              text: 'Loading',
+              spinner: 'el-icon-loading',
+              background: 'rgba(255, 255, 255, 0.7)',
+              target: document.getElementById('communtityList')
+            });
+            this.$http.post('http://127.0.0.1:80/apis/showAvgPriceByCommunity', { community: this.query, date: currentdate}).then((data) => {
+                loading.close();
                 if (data.body.status == 1){
                     alert(data.body.message)
                 }
